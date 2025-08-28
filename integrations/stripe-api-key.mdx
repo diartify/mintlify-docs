@@ -1,0 +1,169 @@
+---
+title: "Creating a Stripe API Key"
+description: "Step-by-step guide to create a restricted Stripe API key for Pointai integration"
+icon: "credit-card"
+---
+
+## Overview
+
+To integrate Stripe with Pointai for payment insights and billing-related support requests, you'll need to create a restricted API key with specific permissions. This guide walks you through the process of creating a secure API key with minimal required permissions.
+
+<Warning>
+Always use restricted API keys instead of standard keys for better security. Restricted keys limit access to only the resources your application needs.
+</Warning>
+
+## Step 1: Access Your Stripe Dashboard
+
+1. Log into your [Stripe Dashboard](https://dashboard.stripe.com)
+2. Navigate to **Developers** → **API keys** in the left sidebar
+
+## Step 2: Create a Restricted Key
+
+1. In the **Restricted keys** section, click **Create restricted key**
+2. You'll see a modal asking "How will you use this API key?"
+3. Select **Providing this key to another website** since you're integrating with Pointai
+
+## Step 3: Configure Key Details
+
+Fill in the following information:
+
+### Name
+Enter a descriptive name for your API key:
+```
+API key for Pointai
+```
+
+### URL (Optional)
+If you want to restrict the key to specific domains, enter:
+```
+https://dashboard.pointai.tech
+https://back.pointai.tech
+```
+
+## Step 4: Set Permissions
+
+Configure the following permissions for your restricted API key:
+
+<AccordionGroup>
+  <Accordion title="Core Resources" icon="database">
+    Set permission to **Write** for:
+    - Apple Pay Domains
+    - Balance
+    - Balance transaction sources
+    - Balance Transfers
+    - Test clocks
+    - Charges
+    - Confirmation tokens
+    - Confirmation token intents
+  </Accordion>
+
+  <Accordion title="Checkout" icon="shopping-cart">
+    Set permission to **Write** for all Checkout resources:
+    - Sessions
+    - Line items
+    - Payment links
+  </Accordion>
+
+  <Accordion title="Billing" icon="receipt">
+    Set permission to **Write** for all Billing resources:
+    - Subscriptions
+    - Invoices
+    - Plans
+    - Products
+    - Prices
+    - Coupons
+    - Discounts
+  </Accordion>
+
+  <Accordion title="Connect" icon="link">
+    Set permission to **Write** for all Connect resources:
+    - Accounts
+    - Account links
+    - Transfers
+    - Application fees
+  </Accordion>
+
+  <Accordion title="Orders" icon="package">
+    Set permission to **Write** for all Orders resources:
+    - Orders
+    - Order items
+    - SKUs
+  </Accordion>
+
+  <Accordion title="All Other Resources" icon="x">
+    Set permission to **None** for all other resource types not mentioned above:
+    - Payment Methods
+    - Customers
+    - Disputes
+    - Files
+    - Webhooks
+    - And any other categories
+  </Accordion>
+</AccordionGroup>
+
+## Step 5: Create the Key
+
+1. Review your permission settings
+2. Click **Create restricted key**
+3. **Important**: Copy the API key immediately as it won't be shown again
+4. Store it securely (you'll need it for Pointai integration)
+
+## Step 6: Verify Your Key
+
+Your restricted API key should:
+- Start with `rk_live_` for live mode or `rk_test_` for test mode
+- Have exactly the permissions you configured
+- Be ready for use in Pointai's onboarding flow
+
+## Using the Key in Pointai
+
+During Pointai's onboarding process:
+1. Select **Stripe** as your payment provider
+2. Paste your restricted API key in the **Stripe Restricted API Key** field
+3. The key format should be: `rk_live_...` or `rk_test_...`
+
+## Security Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Key Security" icon="shield">
+    - Never share your API keys publicly
+    - Use restricted keys over standard keys
+    - Regularly rotate your API keys
+    - Monitor key usage in Stripe dashboard
+  </Card>
+  
+  <Card title="Environment Setup" icon="server">
+    - Use test keys for development
+    - Use live keys only in production
+    - Store keys as environment variables
+    - Never commit keys to version control
+  </Card>
+</CardGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Key not working">
+    - Ensure you copied the complete key
+    - Check that you're using the right key (test vs live)
+    - Verify the key has the correct permissions
+  </Accordion>
+
+  <Accordion title="Permission errors">
+    - Review the required permissions list above
+    - Recreate the key if permissions are missing
+    - Contact support if issues persist
+  </Accordion>
+</AccordionGroup>
+
+## Next Steps
+
+After creating your Stripe API key:
+1. Complete the Pointai onboarding process
+2. Test the integration with a sample transaction
+3. Monitor payment data in your Pointai dashboard
+4. Set up webhook endpoints if needed
+
+<Info>
+Need help? Contact our support team at [support@pointai.tech](mailto:support@pointai.tech)
+</Info>
